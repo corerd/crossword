@@ -1,0 +1,36 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Help",
+            "type": "process",
+            "problemMatcher": [],
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}/src/main.py",
+                "--help"
+            ]
+        },
+        {
+            "label": "Default",
+            "type": "process",
+            "problemMatcher": [],
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}/src/main.py"
+            ]
+        },
+        {
+            "label": "Play",
+            "type": "process",
+            "problemMatcher": [],
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}/src/main.py",
+                "--play"
+            ]
+        }
+    ]
+}
