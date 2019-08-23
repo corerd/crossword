@@ -5,3 +5,8 @@
 *.pyo
 *.pyd
 src/__pycache/*
+
+# OS and temporary stuff:
+*.bak
+*.swp
+.DS_Store

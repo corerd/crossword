@@ -14,12 +14,23 @@
             ]
         },
         {
-            "label": "Default",
+            "label": "Solve default",
             "type": "process",
             "problemMatcher": [],
             "command": "${config:python.pythonPath}",
             "args": [
                 "${workspaceFolder}/src/main.py"
+            ]
+        },
+        {
+            "label": "Solve using thesaurus",
+            "type": "process",
+            "problemMatcher": [],
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}/src/main.py",
+                "--wordlist=../dictionaries/ca_ES/dictionaries/th_ca_ES_v3",
+                "--use-thesaurus"
             ]
         },
         {
@@ -29,6 +40,18 @@
             "command": "${config:python.pythonPath}",
             "args": [
                 "${workspaceFolder}/src/main.py",
+                "--play"
+            ]
+        },
+        {
+            "label": "Play using thesaurus",
+            "type": "process",
+            "problemMatcher": [],
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}/src/main.py",
+                "--wordlist=../dictionaries/ca_ES/dictionaries/th_ca_ES_v3",
+                "--use-thesaurus",
                 "--play"
             ]
         }

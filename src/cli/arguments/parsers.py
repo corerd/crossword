@@ -60,6 +60,16 @@ DEFAULT_PARSER.add_argument("-w","--wordlist",
 	type=str,
 	default=None
 )
+DEFAULT_PARSER.add_argument("--use-thesaurus",
+	metavar="true|false",
+	action="store",
+	nargs="?",
+	help="""The file specified by wordlist option is an an Hunspell thesaurus
+	(%s	by default)"""%("TRUE" if USE_THESAURUS_DEFAULT else "FALSE"),
+	type=evalTF,
+	const=True,
+	default=USE_THESAURUS_DEFAULT
+)
 DEFAULT_PARSER.add_argument("-c","--crossword",
 	metavar="filename",
 	action="store",

@@ -38,12 +38,13 @@ def parseArguments(parser):
 Given the origin of the data for the wordlist, loads the wordlist and returns
 it, while giving some information about it if it's required
 
-@param 	origin 	the source to load the wordlist from
+@param 	origin		the source to load the wordlist from
+@param 	isThesaurus	the source is an Hunspell thesaurus
 @return wordlist valid object (or None if couldn't load)
 """
-def loadWordlist(origin):
+def loadWordlist(origin, isThesaurus=False):
 	LOGGER.info("-> Loading wordlist (from %s)",origin)
-	wordlist = WordList(origin)
+	wordlist = WordList(origin, isThesaurus)
 	if args.timers > 1: 	time_load_wordlist_start = time.time()
 	wordlist.read()
 	if args.timers > 2:
@@ -102,49 +103,68 @@ def selectAlgorithm():
 	return alg
 
 """
-Given the solution returned from the crossword, searches over the internet for
-the definitions of the words appearing in the solution and shows the user the
-definitions so they can solve the crossword theyreselves
+Given the solution returned from the crossword, searches the thesaurus (if any)
+for the definitions of the words appearing in the solution and shows the user
+the definitions so they can solve the crossword theyreselves.
+
+If no thesaurus is provided, then goes on line to search in Wiktionary:
+- https://www.wiktionary.org/
+(only on line search for Catalan language is supported)
 
 @param 	solution 	solution to show hints
 """
 def playGame(solution):
-	from bs4 import BeautifulSoup
-	import mwapi
 	LOGGER.info("---- GAME MODE ----")
 	LOGGER.info("I want to play a game...")
-	session = mwapi.Session('https://ca.wiktionary.org')
-	for word_i in range(len(solution)):
-		word = "".join(list(map(chr,solution[word_i]))).lower()
-		var = crossword.getVariableString(word_i)
-		resp = session.get(action='query',prop='extracts',titles=word)\
-		["query"]["pages"]
-		pages = list(resp.keys())
-		try:
-			extract = resp[pages[0]]["extract"]
-		except:
-			extract = None
-		parser = None
-		if extract:
-		 	parser = BeautifulSoup(extract,"html.parser").findAll("li")
-		definition = ""
-		if parser != None:
-			valid_defs = []
-			for info in parser:
-				text = info.getText()
-				if "Pronúncia" in text \
-				or "Exemples" in text \
-				or "Etimologia" in text \
-				or "Per a més informació vegeu" in text\
-				or len(text.split()) < 4:
-					continue
-				else:
-					valid_defs.append(text)
-			if len(valid_defs):
-				definition = random.choice(valid_defs)
-		if definition == "":
-			definition = word + " (no hem trobat cap definició)"
-		LOGGER.info("%s: %s",var,definition)
+	if wordlist._thes is None:
+		# searches over the internet for the definitions
+		from bs4 import BeautifulSoup
+		import mwapi
+		session = mwapi.Session('https://ca.wiktionary.org')
+		for word_i in range(len(solution)):
+			word = "".join(list(map(chr,solution[word_i]))).lower()
+			var = crossword.getVariableString(word_i)
+			resp = session.get(action='query',prop='extracts',titles=word)\
+			["query"]["pages"]
+			pages = list(resp.keys())
+			try:
+				extract = resp[pages[0]]["extract"]
+			except:
+				extract = None
+			parser = None
+			if extract:
+				parser = BeautifulSoup(extract,"html.parser").findAll("li")
+			definition = ""
+			if parser != None:
+				valid_defs = []
+				for info in parser:
+					text = info.getText()
+					if "Pronúncia" in text \
+					or "Exemples" in text \
+					or "Etimologia" in text \
+					or "Per a més informació vegeu" in text\
+					or len(text.split()) < 4:
+						continue
+					else:
+						valid_defs.append(text)
+				if len(valid_defs):
+					definition = random.choice(valid_defs)
+			if definition == "":
+				definition = word + " (no hem trobat cap definició)"
+			LOGGER.info("%s: %s",var,definition)
+	else:
+		# searches the thesaurus
+		for word_i in range(len(solution)):
+			word = "".join(list(map(chr,solution[word_i]))).lower()
+			var = crossword.getVariableString(word_i)
+			valid_defs = wordlist._thes.lookup(word)
+			definition = ""
+			if valid_defs is not None:
+				meanings = [mean.main for mean in valid_defs.mean_tuple]
+				definition = random.choice(meanings)
+			if definition == "":
+				definition = word + " (no hem trobat cap definició)"
+			LOGGER.info("%s: %s",var,definition)
 
 """
 Given a solution from the crossword, tries to print it over the screen, or logs
@@ -191,7 +211,7 @@ if __name__ == "__main__":
 		args.crossword = ITEMSET_BYNAME[args.itemset]["crossword"]
 
 	# Wordlist
-	wordlist = loadWordlist(args.wordlist)
+	wordlist = loadWordlist(args.wordlist, args.use_thesaurus)
 
 	# Crossword
 	crossword = loadCrossword(args.crossword)

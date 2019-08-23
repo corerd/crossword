@@ -29,6 +29,11 @@ ITEMSET_BYNAME = {
 	ITEMSET_BIG["name"]: ITEMSET_BIG
 }
 
+"""
+Use Hunspell thesaurus
+"""
+USE_THESAURUS_DEFAULT = False
+
 # Information related
 """
 Shows information about the crossword given

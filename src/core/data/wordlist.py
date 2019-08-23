@@ -1,4 +1,5 @@
 import numpy as np
+from .pythes import PyThes
 
 # constants
 """
@@ -23,12 +24,13 @@ class WordList(object):
 						length
 	@attr 	_wordcount 	number of words in the dictionary
 	@attr 	_filename	file name of the loaded word list
+	@attr 	_thes		Hunspell thesaurus (optional)
 	@attr 	_hasRead 	True if has read the file properly
 	@attr 	_hasParsed 	True if has parsed the words properly
 	@attr 	_head 		First words found
 	@attr 	_tail 		Last words found
 	"""
-	__slots__ = ["_wordlist","_filename","_wordcount","_hasRead","_hasParsed",
+	__slots__ = ["_wordlist","_filename","_thes","_wordcount","_hasRead","_hasParsed",
 	"_head","_tail"]
 
 	"""
@@ -36,12 +38,17 @@ class WordList(object):
 	method
 
 	@param 	filename	file name to load
+	@param 	isThesaurus	file name belongs to an Hunspell thesaurus
 	"""
-	def __init__(self, filename):
+	def __init__(self, filename, isThesaurus=False):
 		self._filename = filename
 		self._hasRead = False
 		self._wordcount = 0
 		self._hasParsed = False
+		if isThesaurus:
+			self._thes = PyThes(self._filename)
+		else:
+			self._thes = None
 
 	"""
 	Reads from the filename saved the word list and stores into a list of
@@ -58,7 +65,7 @@ class WordList(object):
 	"""
 	Reads a file containing a word per line into a list
 	"""
-	def _read(self):
+	def _read_wordfile(self):
 		try:
 			self._wordlist = \
 				[line.rstrip('\n').rstrip('\r') for line in \
@@ -67,6 +74,24 @@ class WordList(object):
 			self._wordlist = \
 				[line.rstrip('\n').rstrip('\r') for line in \
 				open(self._filename, 'r',encoding = "ISO-8859-1")]
+
+	"""
+	Reads thesaurus into a list of words
+	"""
+	def _read_thesaurus(self):
+		self._wordlist = []
+		for word in self._thes.getIndex():
+			if word.isalpha() is not True:
+				# skip word if one its characters is not alphabets
+				# also space is not an alphabet
+				continue
+			self._wordlist.append(word)
+
+	def _read(self):
+		if self._thes is None:
+			self._read_wordfile()
+		else:
+			self._read_thesaurus()
 		self._wordcount = len(self._wordlist)
 		self._head = self._wordlist[:WORDS_HEAD]
 		self._tail = self._wordlist[-WORDS_TAIL:]
