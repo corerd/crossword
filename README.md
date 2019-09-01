@@ -8,15 +8,15 @@ We'll use a *backtracking algorithm* variation: *forward-checking*, with some he
 ## What can the _Crossword Solver_ do?
 1. **Solve a crossword board** (read from a file)
 2. **Display the solving process** the software applies while is solving the crossword. This helps us to check how the algorithm is working and introduce improvements based on its behaviour.
-3. **Generate crossword puzzles** given an empty crossword. We'll look for the solutions and afterwards look for the meanings of the words in a local [_Hunspell_](http://hunspell.github.io/) dictionary or online (currently only in [_Wiktionary_](https://www.wiktionary.org/)
-in Catalan language)
+3. **Generate crossword puzzles** given an empty crossword. We'll look for the solutions and afterwards look for the meanings of the words in a local [_Hunspell_](http://hunspell.github.io/) dictionary or online (currently only in [_Wiktionary_](https://www.wiktionary.org/) in Catalan language). The crossword board, solution and its word definitions are then rendered in an HTML file.
+
 
 ## Languages
 The default language is Catalan; a list of words is provided in the file
 `res/diccionari_CB.txt`. Their meanings are searched for in the
 [_Wiktionary_](https://www.wiktionary.org/) online dictionary.
 
-Other languages con be enabled providing a copy of an [_Hunspell_](http://hunspell.github.io/)
+Other languages con be enabled providing a copy of their [_Hunspell_](http://hunspell.github.io/)
 dictionary: words and meanings will be locally searched for in the _Hunspell_ thesaurus.
 
 ### Hunspell dictionaries
@@ -80,9 +80,11 @@ with English words and their meanings:
 python src/main.py --wordlist=directory-path-to-th_en_US_v2 --use-thesaurus --play
 ```
 
+Please note that the thesaurus file name is given without `.dat` or `.idx` extension.
+
 ## Credits
-This is a fork of the [crossword solver](https://github.com/uab-projects/crossword)
-made by @ccebrecos & @davidlj in [ETSE](https://uab.cat/enginyeria), UAB
+This is a fork of the [Crossword Solver](https://github.com/uab-projects/crossword)
+made by ***@ccebrecos & @davidlj in [ETSE](https://uab.cat/enginyeria), UAB***
 <center><img src="http://www.uab.cat/doc/logo-UAB.png" width="100" alt="UAB Logotype"></center>
 
 ## Disclaimer

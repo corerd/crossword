@@ -112,7 +112,8 @@ DEFAULT_PARSER.add_argument("--algorithm",
 DEFAULT_PARSER.add_argument("--play","-p",
 	action="store_const",
 	help="""sets play mode: we'll find the solution and give you definitions so
-	you can fill the crossword yourself""",
+	you can fill the crossword yourself, rendering all together
+	in an HTML file""",
 	const=True,
 	default=False
 )

@@ -85,7 +85,7 @@ class WordList(object):
 				# skip word if one its characters is not alphabets
 				# also space is not an alphabet
 				continue
-			self._wordlist.append(word)
+			self._wordlist.append(word.upper())
 
 	def _read(self):
 		if self._thes is None:

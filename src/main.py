@@ -20,6 +20,7 @@ from core.implements.live_backtracking import *
 from cli.arguments.parsers import DEFAULT_PARSER
 from cli.arguments.constants import *
 from cli.printers.crossword import *
+from renderer.cwboard import CrosswordBoard
 
 # Constants
 LOGGER = logging.getLogger(__name__)
@@ -111,11 +112,17 @@ If no thesaurus is provided, then goes on line to search in Wiktionary:
 - https://www.wiktionary.org/
 (only on line search for Catalan language is supported)
 
+The crossword board, solution and its word definitions are then rendered
+in an HTML file.
+
 @param 	solution 	solution to show hints
 """
 def playGame(solution):
 	LOGGER.info("---- GAME MODE ----")
 	LOGGER.info("I want to play a game...")
+	#game_board = CrosswordBoard(crossword.getLists())
+	game_board = CrosswordBoard(crossword.getOrigin())
+	game_board.setSolution(crossword.getVariables(), solution)
 	if wordlist._thes is None:
 		# searches over the internet for the definitions
 		from bs4 import BeautifulSoup
@@ -152,6 +159,7 @@ def playGame(solution):
 			if definition == "":
 				definition = word + " (no hem trobat cap definició)"
 			LOGGER.info("%s: %s",var,definition)
+			game_board.updateClues(crossword.get2DVariable(word_i), definition)
 	else:
 		# searches the thesaurus
 		for word_i in range(len(solution)):
@@ -165,6 +173,9 @@ def playGame(solution):
 			if definition == "":
 				definition = word + " (no hem trobat cap definició)"
 			LOGGER.info("%s: %s",var,definition)
+			game_board.updateClues(crossword.get2DVariable(word_i), definition)
+	html_file_name = game_board.render()
+	LOGGER.info("Built HTML file in '{}'".format(html_file_name))
 
 """
 Given a solution from the crossword, tries to print it over the screen, or logs

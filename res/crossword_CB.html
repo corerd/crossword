@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Crossword Viewer</title>
+<meta name="author" content="Corrado Ubezio https://github.com/corerd">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.column {
+  float: left;
+  padding: 10px;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 5px;
+}
+#blockcell {
+  background-color: black;
+}
+</style>
+</head>
+<body>
+<h1>Crossword Solver</h1>
+<h2>Origin: res/crossword_CB.txt</h2>
+<table>
+<tr">
+<td><small><sup>&nbsp;1</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;2</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;3</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;4</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;5</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;6</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;7</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;8</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;9</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>10</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>11</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>&nbsp;</td>
+</tr>
+</table>
+<div class="clearfix">
+<div class="column">
+<h3>ACROSS</h3>
+1 Obres de referència: DIEC, GDLC<br>
+5 datiu singular de is<br>
+6 article personal que es col·loca davant els noms propis femenins.<br>
+7        tercera persona del singular   (ell, ella, vostè)  del present d'indicatiu  de  tirar<br>
+8 Possessiu àton de primera persona, masculí singular<br>
+11 llimonada, llimoner, llimonera, llimonerar<br>
+</div>
+<div class="column">
+<h3>DOWN</h3>
+1 genial (no hem trobat cap definició)<br>
+2 eia (no hem trobat cap definició)<br>
+8 Mi (desambiguació) a la  Viquipèdia<br>
+3 Obres de referència: DIEC, GDLC, Optimot<br>
+9 (demanda de confirmació) oi<br>
+4 dora (no hem trobat cap definició)<br>
+10 la (article determinat femení).<br>
+</div>
+</div>
+<h2>Solution</h2>
+<table>
+<tr">
+<td><small><sup>&nbsp;1</sup></small>G</td>
+<td><small><sup>&nbsp;2</sup></small>E</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>N</td>
+<td><small><sup>&nbsp;3</sup></small>T</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+<td><small><sup>&nbsp;4</sup></small>D</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;5</sup></small>E</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>I</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>O</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>O</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;6</sup></small>N</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;7</sup></small>T</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>I</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>R</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;&nbsp;</sup></small>I</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>H</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+</tr>
+<tr">
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>&nbsp;8</sup></small>M</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>O</td>
+<td><small><sup>&nbsp;9</sup></small>N</td>
+<td id="blockcell"><small><sup>#</sup></small>&nbsp;</td>
+<td><small><sup>10</sup></small>L</td>
+</tr>
+<tr">
+<td><small><sup>11</sup></small>L</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>L</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>I</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>M</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>O</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>N</td>
+<td><small><sup>&nbsp;&nbsp;</sup></small>A</td>
+</tr>
+</table>
+<p>&copy; Copyright @ccebrecos & @davidlj in <a href="https://uab.cat/enginyeria">ETSE</a>, UAB</p>
+
+</body>
+</html>
